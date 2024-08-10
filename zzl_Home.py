@@ -122,7 +122,7 @@ def page4():
     st.error('PS:这只是本人对于游戏的喜爱无任何其他意义只是想要推荐给大家看看（希望不要出现一些引战的话题）谢谢！')
 
 def page5():
-    tab1,tab2= st.tabs(['图像','词典'])
+    tab1,tab6= st.tabs(['图像','词典'])
     with tab1:
         st.write(':motorized_wheelchair:图片处理工具:motorized_wheelchair:')
         uploaded_file=st.file_uploader('上传图片',type=['png','jpg','jpeg'])
@@ -140,19 +140,9 @@ def page5():
                 st.image(img_change(img, 1, 2, 1))
             with tab4:
                 st.image(img_change(img, 1, 0, 1))
-            
-    def img_change(img,rc,gc,bc):
-        width,height=img.size
-        img_array=img.load()
-        for x in range(width):
-            for y in range(height):
-                r=img_array[x,y][rc]
-                g=img_array[x,y][gc]
-                b=img_array[x,y][bc]
-                img_array[x,y]=(r,g,b)
-        return img
 
-    with tab2:
+
+    with tab6:
         '词典'
         st.write(':motorized_wheelchair:词典:motorized_wheelchair:')
         with open('words_space.txt','r', encoding='utf-8') as f:
@@ -208,7 +198,19 @@ def page5():
             with st.spinner('Waiting。。。'):
                 time.sleep(3)
             st.success('恭喜你成功啦！')
-            
+
+def img_change(img, rc, gc, bc):
+    '''图片处理'''
+    width, height = img.size
+    img_array = img.load()
+    for x in range(width):
+        for y in range(height):
+            # 获取RGB值
+            r = img_array[x, y][rc]
+            g = img_array[x, y][gc]
+            b = img_array[x, y][bc]
+            img_array[x, y] = (r, g, b)
+    return img
     
 if page =='讨论区':
     page1()
